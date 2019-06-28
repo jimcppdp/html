@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Immutable basic example</title>
+   <script src="https://unpkg.com/immutable@latest/dist/immutable.js"></script>
+  </head>
+  <body>
+    <div>
+      <p>
+        Immutable test, open browser's devtools to see logs.
+      </p>
+    </div>
+    <script>
+      var map1 = Immutable.Map({ a: 1, b: 2, c: 3 });
+      var map2 = map1.set('b', 50);
+      console.log(map1.get('b')); // 2
+      console.log(map2.get('b')); // 50
+    </script>
+  </body>
+</html>

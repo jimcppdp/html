@@ -6,3 +6,4 @@ support
 redux  
 react  
 react_with_jsx  
+immutable  

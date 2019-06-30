@@ -7,6 +7,7 @@ redux
 react  
 react_with_jsx  
 immutable  
+lodash  
 
 
 special support

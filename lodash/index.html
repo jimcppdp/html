@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lodash test</title>
+   <script src="https://unpkg.com/lodash"></script>
+  </head>
+  <body>
+   <h1>Lodash test, open browser's devtools to see logs.</h1>
+   <script>
+
+    console.log(_.drop([1, 2, 3]));
+    // => [2, 3]
+     
+    console.log(_.drop([1, 2, 3], 2));
+    // => [3]
+     
+    console.log(_.drop([1, 2, 3], 5));
+    // => []
+     
+    console.log(_.drop([1, 2, 3], 0));
+    // => [1, 2, 3]
+
+   </script>
+  </body>
+</html>

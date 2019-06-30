@@ -15,3 +15,7 @@ special support
 browserify : demo how to use require in html. goto http://browserify.org/ for detail.  
 es6_import: demo how to use import in html.  
 watchify: auto compile of browserify
+browserify_study: study how browserify works
+module: draft module study
+template: template for new test
+

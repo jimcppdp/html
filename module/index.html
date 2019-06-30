@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>module global import study</title>
+  </head>
+  <body>
+    <h1>module global import study, open browser's devtools to see logs.</h1>
+
+    <pre>
+
+    </pre>
+
+    <script>
+
+      (function e(t, n, r) {
+          // Keep this variables private inside this closure scope
+          var privateFunction = function() {
+            console.log('Shhhh, this is private!');
+          }
+
+          privateFunction();
+
+          console.log(t["a"]);
+          console.log(t.a);
+
+      } ({a:1, b:2}, {c:3}, {d:4}) );
+
+    </script>
+
+  </body>
+</html>
+
+    

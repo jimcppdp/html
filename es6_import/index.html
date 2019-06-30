@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ES6 import example</title>
+  </head>
+  <body>
+
+    <h1>ES6 import test</h1>
+    In order to run this in browser, run "npx serve" first
+    and then open localhost:5000 in browser instead of 
+    chrome index.html or open index.html
+    or
+    chrome http://localhost:5000 in windows or
+    open http://localhost:5000 in macosx
+    detail check https://www.sitepoint.com/using-es-modules/
+
+    <script type="module">
+
+      import { tag } from './html.js'
+
+      const h1 = tag('h1', ' Hello Modules!')
+      document.body.appendChild(h1)
+
+    </script>
+     </body>
+</html>

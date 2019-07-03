@@ -3,6 +3,9 @@ using index.html to learn web stacks
 
 support
 
+es6_arrow_function
+es6_class
+
 redux  
 react  
 react_with_jsx  

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React Redux Simple Example in HTML</title>
+  </head>
+  <body>
+
+    <h2>React Redux Simple Example in HTML</h2>
+    <p>This page demonstrates using React Redux with no build tooling.</p>
+    <p>React Redux is loaded as a script tag.</p>
+
+    <!-- We will put our React component inside this div. -->
+    <div id="like_button_container"></div>
+    <div id="root"></div>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <!-- Load Redux. -->
+    <script src="https://unpkg.com/redux@4.0.1/dist/redux.js"></script>
+
+    <!-- Load babel to transpile jsx code to es5 -->
+    <!-- Don't use this in production: -->
+    <!--
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+    -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.js"></script>
+
+    <!-- Load React-Redux. -->
+    <script src="https://unpkg.com/react-redux@7.1.0/dist/react-redux.js"></script>
+
+    <script type="text/babel">
+
+	'use strict';
+
+    // Based on: https://github.com/vaibhavmule/react-redux-helloworld/
+
+    // Actions
+    const HELLO_WORLD = 'HELLO_WORLD'
+
+    const helloAction = () => {
+      console.log('helloWorld action')
+      return {
+        type: HELLO_WORLD
+      }
+    }
+
+    // Components
+    class App extends React.Component {
+      render() {
+        return (
+          <HelloWorld />
+        )
+      }
+    }
+
+    const Hello = ({ onClick, message }) => {
+      return (
+        <div>
+          <h1>{ message }</h1>
+          <button onClick={onClick}>Click</button>
+        </div>
+      )
+    }
+
+    // TODO: study why even no below still work
+    Hello.propTypes = {
+      //onClick: prop-types.func.isRequired,
+      //message: prop-types.string.isRequired
+    }
+
+    // Container
+    const mapStateToProps = (state, ownProps) => {
+      return {
+        message: state.helloWorld.message
+      }
+    }
+
+    const mapDispatchToProps = (dispatch, ownProps) => {
+      return {
+        onClick: () => {
+          dispatch(helloAction())
+        }
+      }
+    }
+
+    const HelloWorld = ReactRedux.connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )(Hello)
+
+    // Reducers
+    const helloWorldReducer = (state = { message: 'Hello' }, action) => {
+      switch (action.type) {
+        case HELLO_WORLD:
+          console.log('reducer: helloWorld')
+          return Object.assign({}, state, { message: 'Hello, World!' })
+        default:
+          return state
+      }
+    }
+
+    const helloReducer = Redux.combineReducers({
+      helloWorld: helloWorldReducer
+    })
+
+    // Index
+    let store = Redux.createStore(helloReducer)
+
+    ReactDOM.render(
+      <ReactRedux.Provider store={store}>
+        <App />
+      </ReactRedux.Provider>,
+      document.getElementById('root')
+    )
+
+    </script>
+
+  </body>
+</html>

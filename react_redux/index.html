@@ -2,16 +2,15 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>React Redux Simple Example in HTML</title>
+    <title>React Redux Logger Simple Example in HTML</title>
   </head>
   <body>
 
-    <h2>React Redux Simple Example in HTML</h2>
-    <p>This page demonstrates using React Redux with no build tooling.</p>
-    <p>React Redux is loaded as a script tag.</p>
+    <h2>React Redux Logger Simple Example in HTML</h2>
+    <p>This page demonstrates using React Redux Logger with no build tooling.</p>
+    <p>React Redux Logger is loaded as a script tag.</p>
 
     <!-- We will put our React component inside this div. -->
-    <div id="like_button_container"></div>
     <div id="root"></div>
 
     <!-- Load React. -->
@@ -24,14 +23,18 @@
 
     <!-- Load babel to transpile jsx code to es5 -->
     <!-- Don't use this in production: -->
-    <!--
     <script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
-    -->
+    <!-- above or this one both are OK
     <script src="https://unpkg.com/babel-standalone@6/babel.js"></script>
+    -->
 
     <!-- Load React-Redux. -->
     <script src="https://unpkg.com/react-redux@7.1.0/dist/react-redux.js"></script>
 
+    <!-- Load redux-logger -->
+    <script src="https://unpkg.com/redux-logger@3.0.6/dist/redux-logger.js"></script>
+
+    <!-- type="text/babel" make js code to be transpile to ES6 -->
     <script type="text/babel">
 
 	'use strict';
@@ -40,16 +43,20 @@
 
     // Actions
     const HELLO_WORLD = 'HELLO_WORLD'
+    var gCount = 0
 
     const helloAction = () => {
       console.log('helloWorld action')
+
       return {
-        type: HELLO_WORLD
+        type: HELLO_WORLD,
+        count: gCount++
       }
     }
 
     // Components
     class App extends React.Component {
+
       render() {
         return (
           <HelloWorld />
@@ -97,7 +104,7 @@
       switch (action.type) {
         case HELLO_WORLD:
           console.log('reducer: helloWorld')
-          return Object.assign({}, state, { message: 'Hello, World!' })
+          return Object.assign({}, state, { message: 'Hello, World!' + action.count })
         default:
           return state
       }
@@ -108,7 +115,7 @@
     })
 
     // Index
-    let store = Redux.createStore(helloReducer)
+    let store = Redux.createStore(helloReducer, Redux.applyMiddleware(reduxLogger.logger))
 
     ReactDOM.render(
       <ReactRedux.Provider store={store}>

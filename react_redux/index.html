@@ -31,6 +31,9 @@
     <!-- Load React-Redux. -->
     <script src="https://unpkg.com/react-redux@7.1.0/dist/react-redux.js"></script>
 
+    <!-- Load prop-types. -->
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+
     <!-- Load redux-logger -->
     <script src="https://unpkg.com/redux-logger@3.0.6/dist/redux-logger.js"></script>
 
@@ -56,10 +59,29 @@
 
     // Components
     class App extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { count: 0 };
+      }
+
+      componentDidMount() {
+        this.setState( {count: this.state.count + 1} );
+      }
 
       render() {
+        console.log(this.props);
+        console.log(this.state);
         return (
-          <HelloWorld />
+          <div>
+              <div>
+                <h2>Articles</h2>
+                <HelloWorld />
+              </div>
+              <div>
+                <h2>Add a new article</h2>
+                Count: {this.state.count}
+              </div>
+          </div>
         )
       }
     }
@@ -74,9 +96,10 @@
     }
 
     // TODO: study why even no below still work
+    // Reason: forget to load "https://unpkg.com/prop-types@15.6/prop-types.js" 
     Hello.propTypes = {
-      //onClick: prop-types.func.isRequired,
-      //message: prop-types.string.isRequired
+      onClick: PropTypes.func.isRequired,  // isRequired means necessary field, without it is optional
+      message: PropTypes.string.isRequired
     }
 
     // Container
@@ -115,11 +138,11 @@
     })
 
     // Index
-    let store = Redux.createStore(helloReducer, Redux.applyMiddleware(reduxLogger.logger))
+    let store = Redux.createStore(helloReducer, helloReducer.helloWorld, Redux.applyMiddleware(reduxLogger.logger))
 
     ReactDOM.render(
       <ReactRedux.Provider store={store}>
-        <App />
+        <App name="test"/>
       </ReactRedux.Provider>,
       document.getElementById('root')
     )

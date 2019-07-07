@@ -80,6 +80,11 @@
               <div>
                 <h2>Add a new article</h2>
                 Count: {this.state.count}
+                <button className="square" onClick={() => 
+                  this.setState( {count: this.state.count + 1} ) }
+                >
+                  Add #{this.state.count + 1}
+                </button>
               </div>
           </div>
         )

@@ -13,6 +13,8 @@ immutable
 lodash  
 react_redux
 
+bootstrap
+
 special support
 
 browserify : demo how to use require in html. goto http://browserify.org/ for detail.  
